@@ -1,5 +1,5 @@
 /**
- * Buy
+ * Sell
  *
  * v1.0
  *
@@ -10,7 +10,6 @@
 package com.sam.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,18 +18,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * @author sandeep
+ * @author sandeep.
+ *
  */
 @Entity
-public class Buy extends BaseEntity implements Serializable {
+public class Sell extends BaseEntity implements Serializable {
 
-	private static final long serialVersionUID = 1623479096820278673L;
+	private static final long serialVersionUID = -5232672402113206989L;
 
 	@ManyToOne
 	@JoinColumn(nullable = false)
@@ -54,11 +53,6 @@ public class Buy extends BaseEntity implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
-
-	@Column(nullable = false, precision = 10, scale = 5)
-	@Digits(integer = 5, fraction = 5)
-	@NotNull
-	private BigDecimal price;
 
 	@Column(length = 300)
 	@Size(min = 0, max = 300)
@@ -140,21 +134,6 @@ public class Buy extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @return the price
-	 */
-	public BigDecimal getPrice() {
-		return price;
-	}
-
-	/**
-	 * @param price
-	 *            the price to set
-	 */
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
-	/**
 	 * @return the comments
 	 */
 	public String getComments() {
@@ -178,7 +157,6 @@ public class Buy extends BaseEntity implements Serializable {
 		int result = super.hashCode();
 		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		return result;
 	}
@@ -194,7 +172,7 @@ public class Buy extends BaseEntity implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Buy other = (Buy) obj;
+		Sell other = (Sell) obj;
 		if (comments == null) {
 			if (other.comments != null)
 				return false;
@@ -204,11 +182,6 @@ public class Buy extends BaseEntity implements Serializable {
 			if (other.date != null)
 				return false;
 		} else if (!date.equals(other.date))
-			return false;
-		if (price == null) {
-			if (other.price != null)
-				return false;
-		} else if (!price.equals(other.price))
 			return false;
 		if (quantity == null) {
 			if (other.quantity != null)

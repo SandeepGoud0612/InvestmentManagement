@@ -40,6 +40,9 @@ public class Exchange extends BaseEntity implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "exchange", orphanRemoval = true)
 	private List<Buy> buys;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "exchange", orphanRemoval = true)
+	private List<Sell> sells;
+
 	/**
 	 * @return the name
 	 */
@@ -78,10 +81,56 @@ public class Exchange extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param buys the buys to set
+	 * @param buys
+	 *            the buys to set
 	 */
 	public void setBuys(List<Buy> buys) {
 		this.buys = buys;
+	}
+
+	/**
+	 * @return the sells
+	 */
+	public List<Sell> getSells() {
+		return sells;
+	}
+
+	/**
+	 * @param sells the sells to set
+	 */
+	public void setSells(List<Sell> sells) {
+		this.sells = sells;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Exchange other = (Exchange) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
 	}
 	
 }

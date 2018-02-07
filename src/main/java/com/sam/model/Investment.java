@@ -1,5 +1,5 @@
 /**
- * Buy
+ * Investment
  *
  * v1.0
  *
@@ -20,45 +20,40 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Digits;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * @author sandeep
+ * @author sandeep.
+ *
  */
 @Entity
-public class Buy extends BaseEntity implements Serializable {
+public class Investment extends BaseEntity implements Serializable {
 
-	private static final long serialVersionUID = 1623479096820278673L;
+	private static final long serialVersionUID = 382673901713443130L;
 
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	@NotNull
 	private UserAccount userAccount;
 
-	@ManyToOne
-	@JoinColumn(nullable = false)
+	@Column(nullable = false, precision = 10, scale = 5)
+	@Digits(integer = 5, fraction = 5)
 	@NotNull
-	private Exchange exchange;
+	private BigDecimal amount;
 
-	@ManyToOne
-	@JoinColumn(nullable = false)
+	@Column(nullable = false, precision = 6, scale = 3)
+	@Digits(integer = 3, fraction = 3)
 	@NotNull
-	private Coin coin;
-
-	@Column(length = 10, nullable = false)
-	@Max(9999999999L)
-	@NotNull
-	private Long quantity;
+	private BigDecimal fees;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
 
-	@Column(nullable = false, precision = 10, scale = 5)
-	@Digits(integer = 5, fraction = 5)
+	@Column(nullable = false, length = 25)
+	@Size(min = 1, max = 25)
 	@NotNull
-	private BigDecimal price;
+	private String mode;
 
 	@Column(length = 300)
 	@Size(min = 0, max = 300)
@@ -80,48 +75,33 @@ public class Buy extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @return the exchange
+	 * @return the amount
 	 */
-	public Exchange getExchange() {
-		return exchange;
+	public BigDecimal getAmount() {
+		return amount;
 	}
 
 	/**
-	 * @param exchange
-	 *            the exchange to set
+	 * @param amount
+	 *            the amount to set
 	 */
-	public void setExchange(Exchange exchange) {
-		this.exchange = exchange;
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
 	}
 
 	/**
-	 * @return the coin
+	 * @return the fees
 	 */
-	public Coin getCoin() {
-		return coin;
+	public BigDecimal getFees() {
+		return fees;
 	}
 
 	/**
-	 * @param coin
-	 *            the coin to set
+	 * @param fees
+	 *            the fees to set
 	 */
-	public void setCoin(Coin coin) {
-		this.coin = coin;
-	}
-
-	/**
-	 * @return the quantity
-	 */
-	public Long getQuantity() {
-		return quantity;
-	}
-
-	/**
-	 * @param quantity
-	 *            the quantity to set
-	 */
-	public void setQuantity(Long quantity) {
-		this.quantity = quantity;
+	public void setFees(BigDecimal fees) {
+		this.fees = fees;
 	}
 
 	/**
@@ -140,18 +120,18 @@ public class Buy extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @return the price
+	 * @return the mode
 	 */
-	public BigDecimal getPrice() {
-		return price;
+	public String getMode() {
+		return mode;
 	}
 
 	/**
-	 * @param price
-	 *            the price to set
+	 * @param mode
+	 *            the mode to set
 	 */
-	public void setPrice(BigDecimal price) {
-		this.price = price;
+	public void setMode(String mode) {
+		this.mode = mode;
 	}
 
 	/**
@@ -176,10 +156,10 @@ public class Buy extends BaseEntity implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
+		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((price == null) ? 0 : price.hashCode());
-		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
+		result = prime * result + ((fees == null) ? 0 : fees.hashCode());
+		result = prime * result + ((mode == null) ? 0 : mode.hashCode());
 		return result;
 	}
 
@@ -194,26 +174,26 @@ public class Buy extends BaseEntity implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Buy other = (Buy) obj;
-		if (comments == null) {
-			if (other.comments != null)
+		Investment other = (Investment) obj;
+		if (amount == null) {
+			if (other.amount != null)
 				return false;
-		} else if (!comments.equals(other.comments))
+		} else if (!amount.equals(other.amount))
 			return false;
 		if (date == null) {
 			if (other.date != null)
 				return false;
 		} else if (!date.equals(other.date))
 			return false;
-		if (price == null) {
-			if (other.price != null)
+		if (fees == null) {
+			if (other.fees != null)
 				return false;
-		} else if (!price.equals(other.price))
+		} else if (!fees.equals(other.fees))
 			return false;
-		if (quantity == null) {
-			if (other.quantity != null)
+		if (mode == null) {
+			if (other.mode != null)
 				return false;
-		} else if (!quantity.equals(other.quantity))
+		} else if (!mode.equals(other.mode))
 			return false;
 		return true;
 	}

@@ -39,6 +39,12 @@ public class UserAccount extends BaseEntity implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userAccount", orphanRemoval = true)
 	private List<Buy> buys;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userAccount", orphanRemoval = true)
+	private List<Sell> sells;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userAccount", orphanRemoval = true)
+	private List<Investment> investments;
+
 	/**
 	 * @return the name
 	 */
@@ -84,4 +90,64 @@ public class UserAccount extends BaseEntity implements Serializable {
 		this.buys = buys;
 	}
 
+	/**
+	 * @return the sells
+	 */
+	public List<Sell> getSells() {
+		return sells;
+	}
+
+	/**
+	 * @param sells
+	 *            the sells to set
+	 */
+	public void setSells(List<Sell> sells) {
+		this.sells = sells;
+	}
+
+	/**
+	 * @return the investments
+	 */
+	public List<Investment> getInvestments() {
+		return investments;
+	}
+
+	/**
+	 * @param investments the investments to set
+	 */
+	public void setInvestments(List<Investment> investments) {
+		this.investments = investments;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserAccount other = (UserAccount) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+	
 }

@@ -54,6 +54,9 @@ public class Coin extends BaseEntity implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "coin")
 	private List<Buy> buys;
 
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "coin")
+	private List<Sell> sells;
+
 	/**
 	 * @return the name
 	 */
@@ -144,4 +147,73 @@ public class Coin extends BaseEntity implements Serializable {
 		this.buys = buys;
 	}
 
+	/**
+	 * @return the sells
+	 */
+	public List<Sell> getSells() {
+		return sells;
+	}
+
+	/**
+	 * @param sells the sells to set
+	 */
+	public void setSells(List<Sell> sells) {
+		this.sells = sells;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
+		result = prime * result + ((currentPrice == null) ? 0 : currentPrice.hashCode());
+		result = prime * result + ((marketCap == null) ? 0 : marketCap.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Coin other = (Coin) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		if (comments == null) {
+			if (other.comments != null)
+				return false;
+		} else if (!comments.equals(other.comments))
+			return false;
+		if (currentPrice == null) {
+			if (other.currentPrice != null)
+				return false;
+		} else if (!currentPrice.equals(other.currentPrice))
+			return false;
+		if (marketCap == null) {
+			if (other.marketCap != null)
+				return false;
+		} else if (!marketCap.equals(other.marketCap))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+	
 }
