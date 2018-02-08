@@ -47,7 +47,7 @@ public class UserAccountController {
 		return new ResponseEntity<>(userAccount, HttpStatus.OK);
 	}
 
-	@RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<UserAccount>> getAllUserAccounts() {
 		List<UserAccount> userAccounts = userAccountService.getAllUserAccounts();
 		return new ResponseEntity<List<UserAccount>>(userAccounts, HttpStatus.OK);
